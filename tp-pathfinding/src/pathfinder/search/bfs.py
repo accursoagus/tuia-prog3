@@ -23,12 +23,16 @@ class BreadthFirstSearch:
         explored = {} 
         # Add the node to the explored dictionary
         explored[node.state] = True
+
+        #Objective test
+        if node.state == grid.end:
+            return Solution(node, explored)
         
         # Initialize the frontier and add the node
         frontier = QueueFrontier()
         frontier.add(node)
 
-        while True:
+        while not frontier.is_empty():
 
             # Fail if the frontier is empty
             if frontier.is_empty():
@@ -36,23 +40,20 @@ class BreadthFirstSearch:
 
             n = frontier.remove()  # Remove a node from the frontier
 
-            # Objective Test
-            if n.state==grid.end:
-                return Solution(n, explored)
-
             successors = grid.get_neighbours(n.state)  # Get its neighbours
 
             # For each possibly succesors, do:
             for act, res in successors.items():
 
                 if res not in explored:
-                    new_node = Node("", state=res, cost=n.cost + 1, parent=n, action=act)
+                    new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
 
-                #if new_node.state == grid.end:
-                 #   return Solution(new_node, explored)
+                    if new_node.state == grid.end:
+                        return Solution(new_node, explored)
             
                     explored[new_node.state] = True
                     frontier.add(new_node)
+
         
 
     

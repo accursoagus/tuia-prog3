@@ -53,6 +53,8 @@ class BreadthFirstSearch:
             
                     explored[new_node.state] = True
                     frontier.add(new_node)
+                    
+        return NoSolution(explored)
 
         
 

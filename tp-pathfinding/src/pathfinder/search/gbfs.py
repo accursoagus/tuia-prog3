@@ -3,6 +3,11 @@ from ..models.frontier import PriorityQueueFrontier
 from ..models.solution import NoSolution, Solution
 from ..models.node import Node
 
+def my_heuristic(node: Node, goal) -> int:
+    # favorecemos los movimientos que van hacia abajo a la derecha
+  x,y = node.state
+  i,j = goal
+  return abs(x-i)+abs(j-y)
 
 class GreedyBestFirstSearch:
     @staticmethod
@@ -22,6 +27,29 @@ class GreedyBestFirstSearch:
         explored = {} 
         
         # Add the node to the explored dictionary
-        explored[node.state] = True
+        explored[node.state] = node.cost
+
+        frontier = PriorityQueueFrontier()
+        frontier.add(node, my_heuristic(node, grid.end))
+
+        while not frontier.is_empty():
+            n = frontier.pop()
+
+            if n.state == grid.end:
+                return Solution(n, explored)
+
+            successors = grid.get_neighbours(n.state)
         
+            for act, res in successors.items():
+
+                if res not in explored or n.cost + grid.get_cost(res) < explored[res]:
+                    new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
+
+                    #if new_node.state == grid.end:
+                     #   return Solution(new_node, explored)
+
+                    explored[new_node.state] = new_node.cost
+                    frontier.add(new_node, my_heuristic(new_node, grid.end))
+
+
         return NoSolution(explored)

@@ -1,5 +1,5 @@
 from ..models.grid import Grid
-from ..models.frontier import StackFrontier
+from ..models.frontier import PriorityQueueFrontier
 from ..models.solution import NoSolution, Solution
 from ..models.node import Node
 
@@ -44,7 +44,7 @@ class UniformCostSearch:
                     new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
 
                     #if new_node.state == grid.end:
-                    # return Solution(new_node, explored)
+                     #   return Solution(new_node, explored)
 
                     explored[new_node.state] = new_node.cost
                     frontier.add(new_node, new_node.cost)

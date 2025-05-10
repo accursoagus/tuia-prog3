@@ -182,6 +182,7 @@ class TSP(OptProblem):
         value = self.obj_val(state)
         max_act = None
         max_val = float("-inf")
+        tabu_list = []
         for a in self.actions(state):
             i, j = a
             v1 = state[i]+1  # origen de i

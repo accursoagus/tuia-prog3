@@ -3,12 +3,6 @@ from ..models.frontier import PriorityQueueFrontier
 from ..models.solution import NoSolution, Solution
 from ..models.node import Node
 
-def my_heuristic(node: Node, goal) -> int:
-    # favorecemos los movimientos que van hacia abajo a la derecha
-  x,y = node.state
-  i,j = goal
-  return abs(x-i)+abs(j-y)
-
 class AStarSearch:
     @staticmethod
     def search(grid: Grid) -> Solution:
@@ -30,7 +24,7 @@ class AStarSearch:
         explored[node.state] = node.cost
 
         frontier = PriorityQueueFrontier()
-        frontier.add(node, node.cost+my_heuristic(node, grid.end))
+        frontier.add(node, node.cost+grid.my_heuristic(node, grid.end))
 
         while not frontier.is_empty():
             n = frontier.pop()
@@ -46,7 +40,7 @@ class AStarSearch:
                     new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
 
                     explored[new_node.state] = new_node.cost
-                    frontier.add(new_node, new_node.cost+my_heuristic(new_node, grid.end))
+                    frontier.add(new_node, new_node.cost+grid.my_heuristic(new_node, grid.end))
 
 
         return NoSolution(explored)

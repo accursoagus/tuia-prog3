@@ -29,13 +29,14 @@ class AStarSearch:
         while not frontier.is_empty():
             n = frontier.pop()
 
+            #test objetivo
             if n.state == grid.end:
                 return Solution(n, explored)
 
             successors = grid.get_neighbours(n.state)
         
             for act, res in successors.items():
-
+                #sí aún no lo exploré o ya lo exploré con un costo de camino mayor, lo tengo en cuenta
                 if res not in explored or n.cost + grid.get_cost(res) < explored[res]:
                     new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
 

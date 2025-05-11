@@ -39,12 +39,9 @@ class UniformCostSearch:
 
             # For each possibly succesors, do:
             for act, res in successors.items():
-
+                #sí aún no lo exploré o ya lo exploré con un costo de camino mayor, lo tengo en cuenta
                 if res not in explored or n.cost + grid.get_cost(res) < explored[res]:
                     new_node = Node("", state=res, cost=n.cost + grid.get_cost(res), parent=n, action=act)
-
-                    #if new_node.state == grid.end:
-                     #   return Solution(new_node, explored)
 
                     explored[new_node.state] = new_node.cost
                     frontier.add(new_node, new_node.cost)

@@ -194,6 +194,7 @@ class TSP(OptProblem):
             distl1l3 = self.G.get_edge_data(v1, v3)['weight']
             distl2l4 = self.G.get_edge_data(v2, v4)['weight']
             succ_value =  value + distl1l2 + distl3l4 - distl1l3 - distl2l4
+            # si pertenece a la lista tabú y no es mejor que el de mayor valor objetivo (criterio de aspiración), no lo tengo en cuenta 
             if a in tabu_list and succ_value <= best_value:
                 continue
             if succ_value > max_val:

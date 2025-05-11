@@ -83,7 +83,7 @@ class HillClimbingReset(LocalSearch):
     """Algoritmo de ascension de colinas con reinicio aleatorio."""
     def __init__(self):
          super().__init__()
-         self.max_reset = 100
+         self.max_reset = 10
     
     def solve(self, problem: OptProblem):
         start = time()
@@ -121,7 +121,7 @@ class Tabu(LocalSearch):
     """Algoritmo de busqueda tabu."""
     def __init__(self):
         super().__init__()
-        self.max_iters = 1000
+        self.max_iters = 100
         self.tenure = 15
         self.tabu_list = []
 
@@ -138,7 +138,7 @@ class Tabu(LocalSearch):
             act, succ_val = problem.max_action(actual, self.tabu_list, best_value)
             succ = problem.result(actual, act)
 
-            # Update tabu list
+            #actualizo lista tabú, si está llena saco el elemento más antiguo
             self.tabu_list.append(act)
             if len(self.tabu_list) > self.tenure:
                 self.tabu_list.pop(0)

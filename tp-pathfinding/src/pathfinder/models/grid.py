@@ -82,7 +82,7 @@ class Grid:
     def __repr__(self) -> str:
         return f"Grid([[...], ...], {self.start}, {self.end})"
     
-    def my_heuristic(node: Node, goal: tuple[int, int]) -> int:
+    def my_heuristic(self, node: Node, goal: tuple[int, int]) -> int:
         x,y = node.state
         i,j = goal
         return abs(x-i)+abs(j-y)

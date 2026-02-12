@@ -1,6 +1,6 @@
 # Algoritmos de Búsqueda y Optimización
 
-Implementación de agentes inteligentes y algoritmos de optimización para la resolución de problemas de búsqueda en espacios de estados complejos. Este repositorio contiene las soluciones desarrolladas para dos trabajos prácticos centrales, enfocados en búsqueda no informada/informada y metaheurísticas.
+Implementación de algoritmos de optimización para la resolución de problemas de búsqueda en espacios de estados complejos. Este repositorio contiene las soluciones desarrolladas para dos trabajos prácticos centrales, enfocados en búsqueda no informada/informada y metaheurísticas.
 
 ## Estructura del Proyecto
 
